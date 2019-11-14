@@ -110,9 +110,13 @@ function localsetter(fn) {
   'setUTCMinutes',
   'setUTCMonth',
   'setUTCSeconds',
+  'toDateString',
   'toGMTString',
   'toISOString',
   'toJSON',
+  'toLocaleDateString',
+  'toLocaleTimeString',
+  'toTimeString',
   'toUTCString',
   'valueOf',
 ].forEach(passthrough);
@@ -149,7 +153,7 @@ MockDate.prototype.setYear = function (yr) {
 
 MockDate.parse = function (dateString) {
   return new MockDate(dateString).getTime();
-}
+};
 
 MockDate.prototype.getTimezoneOffset = function () {
   return this.calcTZO() * 60;
@@ -170,12 +174,6 @@ MockDate.UTC = _Date.UTC;
 MockDate.prototype.toDateString = function () {
   return `${ weekDays[this.getDay()] } ${ months[this.getMonth()] } ${ this.getDate().toString().padStart(2, '0') } ${ this.getFullYear() }`;
 };
-
-// TODO:
-// 'toDateString',
-// 'toLocaleDateString',
-// 'toLocaleTimeString',
-// 'toTimeString',
 
 function register(new_timezone, glob = global) {
   timezone = new_timezone || 'US/Pacific';
